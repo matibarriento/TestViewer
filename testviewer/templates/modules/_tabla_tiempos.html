@@ -1,0 +1,11 @@
+{% set testing = "%d/%m/%Y %H:%M:%S" %}
+<h3>Tabla de Tiempos</h3>
+<table>
+    <tbody>
+        <tr><td>creacion_testrun</td><td>{{resultado.creacion_testrun.strftime(testing)}}</td></tr>
+        <tr><td>encolado_testrun</td><td>{{resultado.encolado_testrun.strftime(testing)}}</td></tr>
+        <tr><td>inicio_testrun</td><td>{{resultado.inicio_testrun.strftime(testing)}}</td></tr>
+        <tr><td>finalizacion_testrun</td><td>{{resultado.finalizacion_testrun.strftime(testing)}}</td></tr>
+        <tr><td>duracion_testrun</td><td>{{resultado.duracion_testrun}}</td></tr>
+    </tbody>
+</table>

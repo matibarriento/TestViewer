@@ -21,13 +21,15 @@ def Generar(filepath, nombre_reporte="reporte", nombre_template="default.html"):
     filename, file_extension = os.path.splitext(filepath)
     if file_extension.lower() == ".trx":
         trx_module = trx
-        test = trx_module.ObtenerDatos(filepath)
-
+        resultado = trx_module.ObtenerDatos(filepath)
+    else:
+        raise Exception("Archivo invalido")
     template = templateEnv.get_template(nombre_template)
     informe = open(nombre_reporte + '.html', 'w')
-    informe.write(template.render({"test": test}))
+    informe.write(template.render({"resultado": resultado}))
     informe.close()
 
 if __name__ == "__main__":
     # fileName = sys.argv[1]
-    Generar("probando.trx")
+    path_archivo = "/home/matibarriento/Downloads/TestResultFailed.trx"
+    Generar(path_archivo)
