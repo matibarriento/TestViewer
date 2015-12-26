@@ -55,4 +55,20 @@ App en Python para tranformar resultados de test (TRX, XML, etc) en un bonito HT
     test.mensaje
     test.error
 
+### Clase ClaseTest
+    clase.nombre_clase
+    clase.tests
+    clase.exitosos
+    clase.exitoso
+    clase.duracion
+
+### Clase ListaTest
+    lista.id_lista
+    lista.nombre_lista
+    lista.tests
+    lista.exitosos
+    lista.exitoso
+    lista.duracion
+
+
 ###### Un saludo a GATIIIIIIIIIIIINOOOOOOOOOOO
