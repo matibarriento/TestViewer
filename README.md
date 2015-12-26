@@ -1,12 +1,12 @@
 # TestViewer
-App en Python para tranformar resultados de test (Trx, XML, etc) en un bonito HTML, client-friendly.
+App en Python para tranformar resultados de test (TRX, XML, etc) en un bonito HTML, client-friendly.
 
 ###TODO
     **mejorar esta doc provisoria**
 
 ### Contenido
 
-####Clase TestRun
+###Clase TestRun
 
     resultado.id_testrun
     resultado.nombre_maquina_testrun
@@ -39,5 +39,20 @@ App en Python para tranformar resultados de test (Trx, XML, etc) en un bonito HT
     resultado.total
     resultado.alertas
 
+###Clase Test
+    test.id
+    test.computadora_test
+    test.duracion
+    test.fin
+    test.id_ejecucion
+    test.resultado
+    test.resultado_id
+    test.inicio
+    test.id_lista
+    test.nombre_test
+    test.tipo_test
+    test.clase_test
+    test.mensaje
+    test.error
 
-Un saludo a GATIIIIIIIIIIIINOOOOOOOOOOO
+###### Un saludo a GATIIIIIIIIIIIINOOOOOOOOOOO
