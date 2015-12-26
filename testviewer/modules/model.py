@@ -2,36 +2,35 @@
 # -*- coding: utf-8 -*-
 
 
-def ini(instance, propiedades):
-    for prop in propiedades:
-        instance.__dict__[prop] = None
-
-
 class TestRun():
 
     """Modelo de la lista de test"""
 
-    propiedades = {}
-
     def __init__(self):
-        ini(self, TestRun.propiedades)
+        self.listas_test = []
+        self.clases_test = []
+        self.tests = []
 
 
-class TestClase():
+class ClaseTest():
 
     """Modelo de la clase de test"""
 
-    propiedades = {}
+    def __init__(self):
+        self.tests = []
+
+
+class ListaTest():
+
+    """Modelo de la lista de tests"""
 
     def __init__(self):
-        ini(self, TestRun.propiedades)
+        self.tests = []
 
 
 class Test():
 
-    """Model for Test"""
-
-    propiedades = {}
+    """Modelo for Test"""
 
     def __init__(self):
-        ini(self, TestRun.propiedades)
+        pass
