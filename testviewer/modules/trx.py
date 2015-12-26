@@ -35,7 +35,6 @@ def ObtenerDatos(filename):
         resultado.finalizacion_testrun = parseTIME(tiempos.attributes["finish"].value)
         resultado.encolado_testrun = parseTIME(tiempos.attributes["queuing"].value)
         resultado.inicio_testrun = parseTIME(tiempos.attributes["start"].value)
-        resultado.duracion_testrun = resultado.finalizacion_testrun - resultado.inicio_testrun
 
         configuraciones = testrun.getElementsByTagName("TestSettings")[0]
         resultado.id_configuraciones = configuraciones.attributes["id"]
@@ -94,7 +93,6 @@ def ObtenerDatos(filename):
             test.fin = parseTIME(unit_test_result.attributes["endTime"].value)
             test.id_ejecucion = unit_test_result.attributes["executionId"].value
             test.resultado = unit_test_result.attributes["outcome"].value
-            test.exitoso = test.resultado == TEST_EXITOSO_TEXTO
             test.resultado_id = unit_test_result.attributes["relativeResultsDirectory"].value
             test.inicio = parseTIME(unit_test_result.attributes["startTime"].value)
             test.id_lista = unit_test_result.attributes["testListId"].value
@@ -113,6 +111,7 @@ def ObtenerDatos(filename):
                 test.mensaje = None
                 test.error = None
 
+            test.completar(TEST_EXITOSO_TEXTO)
             resultado.tests.append(test)
 
         lista_listas_test = testrun.getElementsByTagName("TestList")
@@ -123,12 +122,8 @@ def ObtenerDatos(filename):
                 lista.id_lista = lista_test.attributes["id"].value
                 lista.nombre_lista = lista_test.attributes["name"].value
                 lista.tests = filter(lambda t: t.id_lista == lista.id_lista, resultado.tests)
-                lista.exitosos = len(filter(lambda t: t.exitoso, lista.tests))
-                lista.exitoso = len(lista.tests) == lista.exitosos
-                lista.duracion = 0
-                if len(lista.tests):
-                    lista.duracion = reduce(
-                        lambda t1, t2: t1 + t2, [t.duracion for t in lista.tests])
+
+                lista.completar()
                 resultado.listas_test.append(lista)
 
         if len(lista_clases) > 0:
@@ -136,12 +131,7 @@ def ObtenerDatos(filename):
                 clase = ClaseTest()
                 clase.nombre_clase = clase_test
                 clase.tests = filter(lambda t: t.clase_test == clase_test, resultado.tests)
-                clase.exitosos = len(filter(lambda t: t.exitoso, clase.tests))
-                clase.exitoso = len(clase.tests) == clase.exitosos
-                clase.duracion = 0
-                if len(clase.tests):
-                    clase.duracion = reduce(
-                        lambda t1, t2: t1 + t2, [t.duracion for t in clase.tests])
+                clase.completar()
                 resultado.clases_test.append(clase)
 
     except Exception as e:
@@ -151,4 +141,5 @@ def ObtenerDatos(filename):
         if os.path.isfile(TEMP_FILE_NAME):
             os.remove(TEMP_FILE_NAME)
 
+    resultado.completar()
     return resultado

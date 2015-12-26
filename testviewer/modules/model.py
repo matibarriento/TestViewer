@@ -11,6 +11,9 @@ class TestRun():
         self.clases_test = []
         self.tests = []
 
+    def completar(self):
+        self.duracion_testrun = self.finalizacion_testrun - self.inicio_testrun
+
 
 class ClaseTest():
 
@@ -18,6 +21,14 @@ class ClaseTest():
 
     def __init__(self):
         self.tests = []
+
+    def completar(self):
+        self.exitosos = len(filter(lambda t: t.exitoso, self.tests))
+        self.exitoso = len(self.tests) == self.exitosos
+        self.duracion = 0
+        if len(self.tests):
+            self.duracion = reduce(
+                lambda t1, t2: t1 + t2, [t.duracion for t in self.tests])
 
 
 class ListaTest():
@@ -27,6 +38,14 @@ class ListaTest():
     def __init__(self):
         self.tests = []
 
+    def completar(self):
+        self.exitosos = len(filter(lambda t: t.exitoso, self.tests))
+        self.exitoso = len(self.tests) == self.exitosos
+        self.duracion = 0
+        if len(self.tests):
+            self.duracion = reduce(
+                lambda t1, t2: t1 + t2, [t.duracion for t in self.tests])
+
 
 class Test():
 
@@ -34,3 +53,6 @@ class Test():
 
     def __init__(self):
         pass
+
+    def completar(self, texto_exitoso):
+        self.exitoso = self.resultado == texto_exitoso
