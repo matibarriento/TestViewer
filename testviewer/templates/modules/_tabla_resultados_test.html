@@ -1,0 +1,8 @@
+<h3>Tabla de resultados de tests</h3> 
+<table>
+    <tbody>
+    {% for test in resultado.tests %}
+        <tr><td>{{test.nombre_test}}</td><td>{{test.resultado}}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
